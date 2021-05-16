@@ -32,8 +32,8 @@ const Header = () => {
                 <Nav.Link>
                   <Badge badgeContent={cartItems.length} color='primary'>
                     <ShoppingCartIcon />
-                    Cart
                   </Badge>
+                  Cart
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
