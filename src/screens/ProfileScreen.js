@@ -10,6 +10,7 @@ import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { listMyOrders } from "../actions/orderActions";
 
 import CancelIcon from "@material-ui/icons/Cancel";
+import Meta from "../components/Meta";
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState("");
@@ -59,6 +60,7 @@ const ProfileScreen = ({ location, history }) => {
   return (
     <Row>
       <Col md={3}>
+        <Meta title="Your Profile || Kumar's Online Shop" />
         <h2>User Profile</h2>
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}

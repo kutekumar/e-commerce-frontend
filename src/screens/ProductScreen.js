@@ -14,11 +14,16 @@ import {
 import Rating from "../components/Rating";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import Meta from "../components/Meta";
+
 import {
   listProductDetails,
   createProductReview,
 } from "../actions/productActions";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
+
+import { motion } from "framer-motion";
+import { fadeIn } from "../animations";
 
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1);
@@ -64,7 +69,7 @@ const ProductScreen = ({ history, match }) => {
     );
   };
   return (
-    <>
+    <motion.div variants={fadeIn} initial='hidden' animate='show' exit='exit'>
       <Link className='btn btn-light my-3' to='/'>
         Go Back
       </Link>
@@ -74,6 +79,7 @@ const ProductScreen = ({ history, match }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
+          <Meta title={product.name} />
           <Row>
             <Col md={6}>
               <Image src={product.image} alt={product.name} fluid />
@@ -210,7 +216,7 @@ const ProductScreen = ({ history, match }) => {
           </Row>
         </>
       )}
-    </>
+    </motion.div>
   );
 };
 

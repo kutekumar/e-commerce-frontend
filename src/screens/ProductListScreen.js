@@ -15,6 +15,7 @@ import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
+import Meta from "../components/Meta";
 
 const ProductListScreen = ({ history, match }) => {
   const pageNumber = match.params.pageNumber || 1;
@@ -79,6 +80,7 @@ const ProductListScreen = ({ history, match }) => {
     <>
       <Row className='align-items-center'>
         <Col>
+          <Meta title="Products List || Kumar's Online Shop" />
           <h1>Products</h1>
         </Col>
         <Col className='text-right' style={{ textAlign: "right" }}>

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { saveShippingAddress } from "../actions/cartActions";
+import Meta from "../components/Meta";
 
 const ShippingScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart);
@@ -24,6 +25,7 @@ const ShippingScreen = ({ history }) => {
   return (
     <FormContainer>
       <CheckoutSteps step1 step2 />
+      <Meta title="Shipping || Kumar's Online Shop" />
       <h1>Shipping</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group controlId='address'>
@@ -47,10 +49,10 @@ const ShippingScreen = ({ history }) => {
         </Form.Group>
 
         <Form.Group controlId='postalCode'>
-          <Form.Label>Postal Code</Form.Label>
+          <Form.Label>Phone Number </Form.Label>
           <Form.Control
             type='text'
-            placeholder='Postal Code'
+            placeholder='Enter Phone Number'
             value={postalCode}
             required
             onChange={(e) => setPostalCode(e.target.value)}></Form.Control>

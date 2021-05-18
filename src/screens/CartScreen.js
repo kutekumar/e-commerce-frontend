@@ -12,6 +12,7 @@ import {
 } from "react-bootstrap";
 import Message from "../components/Message";
 import { addToCart, removeFromCart } from "../actions/cartActions";
+import Meta from "../components/Meta";
 
 import DeleteIcon from "@material-ui/icons/Delete";
 
@@ -45,7 +46,11 @@ const CartScreen = ({ match, location, history }) => {
   return (
     <Row>
       <Col md={8}>
+        <Meta title="Shopping Cart || Kumar's Online Shop" />
         <h1>Shopping Cart</h1>
+        <Link className='btn btn-light my-3' to='/'>
+          Go Back
+        </Link>
         {cartItems.length === 0 ? (
           <Message>
             You cart is empty.<Link to='/'>Go Back</Link>

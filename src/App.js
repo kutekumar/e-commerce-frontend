@@ -1,7 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {
+  // BrowserRouter as Router,
+  Route,
+  Switch,
+  useLocation,
+} from "react-router-dom";
 import { Container } from "react-bootstrap";
-
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomeScreen from "./screens/HomeScreen";
@@ -20,52 +24,57 @@ import UserEditScreen from "./screens/UserEditScreen";
 import ProductListScreen from "./screens/ProductListScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
 
+import { AnimatePresence } from "framer-motion";
+
 const App = () => {
+  const location = useLocation();
   return (
     <>
-      <Router>
-        <Header />
+      <Header />
 
-        <main className='py-3'>
-          <Container>
-            <Route path='/order/:id?' component={OrderScreen} />
-            <Route path='/placeorder' component={PlaceOrderScreen} />
-            <Route path='/payment' component={PaymentScreen} />
-            <Route path='/shipping' component={ShippingScreen} />
-            <Route path='/login' component={LoginScreen} />
-            <Route path='/register' component={RegisterScreen} />
-            <Route path='/profile' component={ProfileScreen} />
-            <Route path='/product/:id' component={ProductScreen} />
-            <Route path='/cart/:id?' component={CartScreen} />
-            <Route path='/admin/userlist' component={UserListScreen} />
-            <Route
-              path='/admin/productlist'
-              component={ProductListScreen}
-              exact
-            />
-            <Route
-              path='/admin/productList/:pageNumber'
-              component={ProductListScreen}
-              exact
-            />
-            <Route path='/admin/user/:id/edit' component={UserEditScreen} />
-            <Route path='/admin/orderlist/' component={OrderListScreen} />
-            <Route
-              path='/admin/product/:id/edit'
-              component={ProductEditScreen}
-            />
-            <Route path='/search/:keyword' component={HomeScreen} exact />
-            <Route path='/page/:pageNumber' component={HomeScreen} exact />
-            <Route
-              path='/search/:keyword/page/:pageNumber'
-              component={HomeScreen}
-              exact
-            />
-            <Route path='/' component={HomeScreen} exact />
-          </Container>
-        </main>
-        <Footer />
-      </Router>
+      <main className='py-3'>
+        <Container>
+          <AnimatePresence exitBeforeEnter>
+            <Switch location={location} key={location.pathname}>
+              <Route path='/order/:id?' component={OrderScreen} />
+              <Route path='/placeorder' component={PlaceOrderScreen} />
+              <Route path='/payment' component={PaymentScreen} />
+              <Route path='/shipping' component={ShippingScreen} />
+              <Route path='/login' component={LoginScreen} />
+              <Route path='/register' component={RegisterScreen} />
+              <Route path='/profile' component={ProfileScreen} />
+              <Route path='/product/:id' component={ProductScreen} />
+              <Route path='/cart/:id?' component={CartScreen} />
+              <Route path='/admin/userlist' component={UserListScreen} />
+              <Route
+                path='/admin/productlist'
+                component={ProductListScreen}
+                exact
+              />
+              <Route
+                path='/admin/productList/:pageNumber'
+                component={ProductListScreen}
+                exact
+              />
+              <Route path='/admin/user/:id/edit' component={UserEditScreen} />
+              <Route path='/admin/orderlist/' component={OrderListScreen} />
+              <Route
+                path='/admin/product/:id/edit'
+                component={ProductEditScreen}
+              />
+              <Route path='/search/:keyword' component={HomeScreen} exact />
+              <Route path='/page/:pageNumber' component={HomeScreen} exact />
+              <Route
+                path='/search/:keyword/page/:pageNumber'
+                component={HomeScreen}
+                exact
+              />
+              <Route path='/' component={HomeScreen} exact />
+            </Switch>
+          </AnimatePresence>
+        </Container>
+      </main>
+      <Footer />
     </>
   );
 };

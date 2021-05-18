@@ -8,6 +8,8 @@ import { logout } from "../actions/userActions";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Badge from "@material-ui/core/Badge";
+import { motion } from "framer-motion";
+import { fadeInHeader } from "../animations";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -17,11 +19,17 @@ const Header = () => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
-  const logoutHandler = () => {
+  const logoutHandler = (history) => {
     dispatch(logout());
+    history.push("/");
+    localStorage.removeItem("cartItems");
   };
   return (
-    <header>
+    <motion.header
+      variants={fadeInHeader}
+      initial='hidden'
+      animate='show'
+      exit='exit'>
       <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
@@ -45,9 +53,13 @@ const Header = () => {
                   <LinkContainer to='/profile'>
                     <NavDropdown.Item>Proile</NavDropdown.Item>
                   </LinkContainer>
-                  <NavDropdown.Item onClick={logoutHandler}>
-                    Logout
-                  </NavDropdown.Item>
+                  <Route
+                    render={({ history }) => (
+                      <NavDropdown.Item onClick={() => logoutHandler(history)}>
+                        Logout
+                      </NavDropdown.Item>
+                    )}
+                  />
                 </NavDropdown>
               ) : (
                 <LinkContainer to='/login'>
@@ -74,7 +86,7 @@ const Header = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    </header>
+    </motion.header>
   );
 };
 

@@ -6,6 +6,7 @@ import CheckoutSteps from "../components/CheckoutSteps";
 import { Link } from "react-router-dom";
 
 import { createOrder } from "../actions/orderActions";
+import Meta from "../components/Meta";
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -79,6 +80,7 @@ const PlaceOrderScreen = ({ history }) => {
           </ListGroup>
 
           <ListGroup.Item>
+            <Meta title="Your Order Confirmation || Kumar's Online  Shop" />
             <h2>Order Items</h2>
             {cart.cartItems.length === 0 ? (
               <Message> Your cart is empty</Message>

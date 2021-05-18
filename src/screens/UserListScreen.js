@@ -10,6 +10,7 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
+import Meta from "../components/Meta";
 
 const UserListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ const UserListScreen = ({ history }) => {
 
   return (
     <>
+      <Meta title="Users || Kumar's Online Shop" />
       <h1>Users</h1>
       {loading ? (
         <Loader />

@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Carousel, Image, Row, Col } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+
 import Loader from "./Loader";
 import Message from "./Message";
 
@@ -22,27 +26,23 @@ const ProductCarousel = () => {
   ) : error ? (
     <Message variant='danger'>{error}</Message>
   ) : (
-    <Carousel pause='hover' className='bg-dark'>
+    <Carousel className='carousel' autoPlay infiniteLoop>
       {products.map((product) => (
-        <Carousel.Item key={product._id}>
-          <Row className='justify-content-md-center'>
-            <Col xs={12} sm={6} md={6}>
-              <Link to={`/product/${product._id}`}>
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  className=''
-                  fluid
-                />
-                <Carousel.Caption className='carousel-caption'>
-                  <h2>
-                    {product.name} - (${product.price})
-                  </h2>
-                </Carousel.Caption>
-              </Link>
-            </Col>
-          </Row>
-        </Carousel.Item>
+        <div key={product._id}>
+          <Link to={`/product/${product._id}`}>
+            <Image
+              src={product.image}
+              alt={product.name}
+              className='flush'
+              fluid
+            />
+            <p className='carousel-caption'>
+              <h2>
+                {product.name} - (${product.price})
+              </h2>
+            </p>
+          </Link>
+        </div>
       ))}
     </Carousel>
   );

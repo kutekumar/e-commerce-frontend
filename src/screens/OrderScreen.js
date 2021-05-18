@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { getOrderDetails, deliverOrder } from "../actions/orderActions";
 
 import { ORDER_DELIVER_RESET } from "../constants/orderConstants";
+import Meta from "../components/Meta";
 
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id;
@@ -24,12 +25,12 @@ const OrderScreen = ({ match, history }) => {
   const orderDeliver = useSelector((state) => state.orderDeliver);
   const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
 
+  const addDecimals = (num) => {
+    return (Math.round(num * 100) / 100).toFixed(2);
+  };
+
   if (!loading) {
     //Calculator Prices
-
-    const addDecimals = (num) => {
-      return (Math.round(num * 100) / 100).toFixed(2);
-    };
 
     order.itemsPrice = addDecimals(
       order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
@@ -58,6 +59,7 @@ const OrderScreen = ({ match, history }) => {
     <Message variant='danger'>{error}</Message>
   ) : (
     <>
+      <Meta title="Your Order || Kumar's Online Shop" />
       <h1>Order {order._id}</h1>
       <Row>
         <Col md={8}>
@@ -115,7 +117,8 @@ const OrderScreen = ({ match, history }) => {
                         <Link to={`/product/${item.product}`}>{item.name}</Link>
                       </Col>
                       <Col md={4}>
-                        {item.qty} x ${item.price} = ${item.qty * item.price}
+                        {item.qty} x ${item.price} = $
+                        {addDecimals(item.qty * item.price)}
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -164,6 +167,14 @@ const OrderScreen = ({ match, history }) => {
                     onClick={delieverHandler}>
                     Deliverd & Paid
                   </Button>
+                </ListGroup.Item>
+              )}
+              {userInfo && !userInfo.isAdmin && (
+                <ListGroup.Item>
+                  <Message>
+                    Your products are being prepared to deliver. Thank you for
+                    shopping with us.
+                  </Message>
                 </ListGroup.Item>
               )}
             </ListGroup>
